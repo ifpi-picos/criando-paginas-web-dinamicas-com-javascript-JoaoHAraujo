@@ -11,23 +11,21 @@
 <body>
   <h4>Endereço</h4>
   <form>
-    <!-- <label>UF: </label>
+    <label>UF: </label>
     <select name="uf" id="uf">
       <option value="0">Selecione</option>
       <option value="1">PI</option>
-      <option value="1">PE</option>
-      <option value="1">DF</option>
+      <option value="2">PE</option>
+      <option value="3">DF</option>
     </select>
     <br><br>
     <label>Cidade: </label>
-    <select name="uf" id="uf">
+    <select name="cidade" id="cidade">
       <option value="0">Selecione</option>
     </select>
-    <button onclick="alert('UF: - Cidade: -, Salvo com sucesso!')">Salvar</button> -->
-    <input type="number" name="" id="">
-    <input type="number" name="" id="">
-    <button>Somar</button>
+    <button id= "btnSalvar" onclick="alert(`UF: ${uf.options[uf.selectedIndex].text}\nCidade: ${cidades.options[cidades.selectedIndex].text}\nSalvo com sucesso!`)">Salvar</button>
   </form>
+  <script src="script.js"></script>
 </body>
 
 </html>

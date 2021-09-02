@@ -1,34 +1,36 @@
-function leNotas () {
-  const notas = []
-  for (let index = 0; index < 3; index++) {
-    const nota = Math.random() * 10
-    console.log('nota ', index, ': ', nota)
-    notas = []
-  }
-  return notas
+const indexEstados = ['select', 'pi', 'pe', 'df']
+const municipios = {
+  select: ['Selecione'],
+  pi: ['Picos', 'Teresina', 'Inhuma', 'Parnaíba', 'Oeiras'],
+  pe: ['Recife', 'Petrolina', 'Salgueiro'],
+  df: ['Brasília', 'Gama', 'Taguatinga', 'Paranoá']
 }
 
-function calculaMedia (notas) {
-  let soma = 0
-  for (let index = 0; index < notas.length; index++) {
-    soma = soma + notas[index]
+const uf = document.getElementById('uf')
+let cidades = document.getElementById('cidade')
+const ufSelected = uf.options[uf.selectedIndex].text // Salva o texto da opção selecionada
+const cidadeSelected = cidades.options[cidades.selectedIndex].text
+
+uf.addEventListener('change', handleUf)
+
+function clearSelect() { // Essa função é para limpar o select anterior em caso de troca e manter a option 'Selecione' para evitar que o      usuário mantenha uma cidade selecionada por engano.
+  let lista = cidades.length
+  for (let i = lista; i > 0; i--) {
+    cidades.remove(cidades[i])
   }
-  const media = soma / notas.length
-  return media
+  let select = document.createElement('option')
+  select.value = 0
+  select.textContent = municipios[indexEstados[0]][0]
+  cidades.appendChild(select)
 }
 
-function vericaSituacaoDoAluno (media) {
-  if (media < 4) {
-    return 'Reprovado'
-  } else if (media < 7) {
-    return 'Recuperação'
-  } else {
-    return 'Aprovado'
+function handleUf () {   
+  const selectUf =  municipios[indexEstados[uf.value]] // Endereço da array do estado selecionado 
+  clearSelect()
+  for (let i = 0; i < selectUf.length; i++) {
+    let opt = document.createElement('option')
+    opt.value = i
+    opt.textContent = selectUf[i]
+    cidades.appendChild(opt)
   }
 }
-
-const notas = leNotas()
-const media = calculaMedia(notas)
-console.log('A sua média final é: ', media)
-const situacaoDoAluno = vericaSituacaoDoAluno(media)
-console.log('Situação do aluno: ', situacaoDoAluno)
