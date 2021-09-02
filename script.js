@@ -8,8 +8,6 @@ const municipios = {
 
 const uf = document.getElementById('uf')
 let cidades = document.getElementById('cidade')
-const ufSelected = uf.options[uf.selectedIndex].text // Salva o texto da opção selecionada
-const cidadeSelected = cidades.options[cidades.selectedIndex].text
 
 uf.addEventListener('change', handleUf)
 
