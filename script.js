@@ -1,34 +1,37 @@
-const indexEstados = ['select', 'pi', 'pe', 'df']
-const municipios = {
-  select: ['Selecione'],
-  pi: ['Picos', 'Teresina', 'Inhuma', 'Parnaíba', 'Oeiras'],
-  pe: ['Recife', 'Petrolina', 'Salgueiro'],
-  df: ['Brasília', 'Gama', 'Taguatinga', 'Paranoá']
-}
+const ufSelect = document.querySelector('#uf')
+const cidadeSelect = document.querySelector('#cidade')
+const btnSalvar = document.querySelector('#btnSalvar')
 
-const uf = document.getElementById('uf')
-let cidades = document.getElementById('cidade')
+const cidades = new Map()
+  cidades.set(0, ['Selecione'])
+  cidades.set(1, ['Picos', 'Teresina', 'Inhuma', 'Parnaíba', 'Oeiras'])
+  cidades.set(2, ['Recife', 'Petrolina', 'Salgueiro'])
+  cidades.set(3, ['Brasília', 'Gama', 'Taguatinga', 'Paranoá'])
 
-uf.addEventListener('change', handleUf)
-
-function clearSelect() { // Essa função é para limpar o select anterior em caso de troca e manter a option 'Selecione' para evitar que o      usuário mantenha uma cidade selecionada por engano.
-  let lista = cidades.length
-  for (let i = lista; i > 0; i--) {
-    cidades.remove(cidades[i])
-  }
-  let select = document.createElement('option')
-  select.value = 0
-  select.textContent = municipios[indexEstados[0]][0]
-  cidades.appendChild(select)
-}
-
-function handleUf () {   
-  const selectUf =  municipios[indexEstados[uf.value]] // Endereço da array do estado selecionado 
+ufSelect.addEventListener('change', () => { // Capta escolha de UF e popula a lista de cidades de acordo.
   clearSelect()
-  for (let i = 0; i < selectUf.length; i++) {
+  const listaCidades = (cidades.get(parseInt(ufSelect.value)))
+  for(i = 0; i < listaCidades.length; i++) {
     let opt = document.createElement('option')
     opt.value = i
-    opt.textContent = selectUf[i]
-    cidades.appendChild(opt)
+    opt.text = listaCidades[i]
+    cidadeSelect.appendChild(opt)
   }
+})
+
+function clearSelect() {  // Limpa a lista dinâmica após troca de opção de UF e coloca a opção 'selecione' como a primeira sempre.
+  const clearCidadeSelect = cidadeSelect.length
+  for(i = clearCidadeSelect; i > 0; i--) {
+    cidadeSelect.remove(cidadeSelect[i])
+  }
+  const select = document.createElement('option')
+  select.value = 0
+  select.text = cidades.get(0)
+  cidadeSelect.appendChild(select)
 }
+
+btnSalvar.addEventListener('click', () => {  // Salvando e mostrando opções escolhidas ao apertar botão
+  const ufSelected = ufSelect.options[ufSelect.selectedIndex]
+  const cidadeSelected = cidadeSelect.options[cidadeSelect.selectedIndex]
+  window.alert(`UF: ${ufSelected.text}\nCidade: ${cidadeSelected.text}\nSalvo com sucesso!`)
+})
