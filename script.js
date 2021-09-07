@@ -34,8 +34,8 @@ function populaCidades() {
           opt.textContent = cidade.nome
           cidadeSelect.appendChild(opt)
         })
-      .catch(() => {console.log('ERRO! A API está inoperante!')})
       })
+      .catch(() => {console.log('ERRO! A API está inoperante!')})
   })
 }
 
@@ -50,38 +50,14 @@ function clearSelect() {
   cidadeSelect.appendChild(select)
 }
 
+function salvarEndereco() {
+btnSalvar.addEventListener('click', () => {  // Salvando e mostrando opções escolhidas ao apertar botão
+  let ufSelected = ufSelect.options[ufSelect.selectedIndex].text
+  let cidadeSelected = cidadeSelect.options[cidadeSelect.selectedIndex].text
+  window.alert(`UF: ${ufSelected}\nCidade: ${cidadeSelected}\nSalvo com sucesso!`)
+})
+}
+
 populaEstados()
 populaCidades()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function clearSelect() {  // Limpa a lista dinâmica após troca de opção de UF e coloca a opção 'selecione' como a primeira sempre.
-//   const clearCidadeSelect = cidadeSelect.length
-//   for(i = clearCidadeSelect; i > 0; i--) {
-//     cidadeSelect.remove(cidadeSelect[i])
-//   }
-//   const select = document.createElement('option')
-//   select.value = 0
-//   select.text = cidades.get(0)
-//   cidadeSelect.appendChild(select)
-// }
-
-// btnSalvar.addEventListener('click', () => {  // Salvando e mostrando opções escolhidas ao apertar botão
-//   const ufSelected = ufSelect.options[ufSelect.selectedIndex]
-//   const cidadeSelected = cidadeSelect.options[cidadeSelect.selectedIndex]
-//   window.alert(`UF: ${ufSelected.text}\nCidade: ${cidadeSelected.text}\nSalvo com sucesso!`)
-// })
+salvarEndereco()
