@@ -20,14 +20,7 @@ ufSelect.addEventListener('change', () => { // Capta escolha de UF e popula a li
 })
 
 function clearSelect() {  // Limpa a lista dinâmica após troca de opção de UF e coloca a opção 'selecione' como a primeira sempre.
-  const clearCidadeSelect = cidadeSelect.length
-  for(i = clearCidadeSelect; i > 0; i--) {
-    cidadeSelect.remove(cidadeSelect[i])
-  }
-  const select = document.createElement('option')
-  select.value = 0
-  select.text = cidades.get(0)
-  cidadeSelect.appendChild(select)
+  cidadeSelect.innerHTML = '<option value="0">Selecione</option>'
 }
 
 btnSalvar.addEventListener('click', () => {  // Salvando e mostrando opções escolhidas ao apertar botão
